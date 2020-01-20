@@ -6,6 +6,9 @@ import methods
 
 app = Flask(__name__)
 player=methods.player()
+#push確認
+
+
 
 # 初めのログイン画面表示
 @app.route("/")
@@ -69,8 +72,6 @@ def work():
 def sleep():
     # sleep
     return render_template("game.html",message="寝た",money=player.money,fatigue=player.mother_fatigue,time="仕事前")
-
-
 
 if __name__ == '__main__':
     app.run()
