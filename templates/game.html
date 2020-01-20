@@ -1,0 +1,58 @@
+<!--ゲーム画面用-->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ニートっち</title>
+</head>
+<body>
+    <form action="/logout">
+        <input type="submit" value="ログアウト">
+    </form>
+
+    <img src="image/door.jpg">
+
+    <form action="/talk">
+        <input type="submit" value="話しかける">
+    </form>
+
+    <form action="/feed">
+        <select name="food_id">
+            <option value="food1">選択肢のサンプル1(10円)</option>
+            <option value="food2">選択肢のサンプル2(20円)</option>
+            <option value="food3">選択肢のサンプル3(30円)</option>
+            <option value="food4">選択肢のサンプル4(40円)</option>
+            <option value="food5">選択肢のサンプル5(50円)</option>
+        </select>
+        <input type="submit" value="食事を与える">
+    </form>
+
+    <form action="/buy">
+        <select name="buy_id">
+            <option value="buy1">選択肢のサンプル1(100円)</option>
+            <option value="buy2">選択肢のサンプル2(200円)</option>
+            <option value="buy3">選択肢のサンプル3(300円)</option>
+            <option value="buy4">選択肢のサンプル4(400円)</option>
+            <option value="buy5">選択肢のサンプル5(500円)</option>
+        </select>
+        <input type="submit" value="物を買ってあげる">
+    </form>
+
+    <form action="/work">
+        <input type="submit" value="仕事にいく">
+    </form>
+
+    <form action="/sleep">
+        <input type="submit" value="寝る">
+    </form>
+    所持金：{{ money }}<br>
+    疲労度：{{ fatigue }}<br>
+    時間:{{ time }}<br>
+    <!--ニートの返事-->
+    {{ neet_answer }}<br>
+    <!--直前の行動記録用-->
+    {{ message }}
+
+</body>
+</html>

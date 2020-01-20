@@ -1,0 +1,28 @@
+<!--ログイン画面用-->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ニートっち - ログイン</title>
+</head>
+<body>
+
+    <!--入力間違いのときのエラーメッセージ用-->
+    {{ message }}
+    <h3>アカウントを作成済みの方</h3>
+    <form action="/login" method="POST">
+        <input type="text" name="id" placeholder="idを入力してください"><br>
+        <input type="password" name="password" placeholder="passを入力してください"><br>
+        <input type="submit" value="ログイン">
+    </form>
+
+    <h3>アカウントを所持していない方</h3>
+    <form action="/create" method="POST">
+        <input type="text" name="id" placeholder="idを入力してください"><br>
+        <input type="password" name="password" placeholder="passを入力してください"><br>
+        <input type="submit" value="アカウント作成">
+    </form>
+
+</body>
+</html>
