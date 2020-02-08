@@ -2,7 +2,6 @@
 
 from flask import Flask,render_template,request
 import methods
-# import sql
 
 app = Flask(__name__)
 player=methods.player()
@@ -35,12 +34,17 @@ def create_account():
     else:
         return render_template("login.html",message="ユーザIDが既に使用されています")
 
+
+# セーブボタン用
+
+
 # セーブしてログイン画面に戻る
 @app.route("/logout")
 def logout():
     # セーブ
     return render_template("login.html")
 
+# ご飯と同じく選択肢で
 @app.route("/talk")
 def talk():
     # トーク
@@ -51,8 +55,8 @@ def talk():
 def feed():
     # feed
     food_id = request.args.get("food_id")
-
-    return render_template("game.html",message=food_id+"を与えた",neet_answer="",money=player.money,fatigue=player.mother_fatigue,time="仕事前")
+    result=player.feed(food_id)
+    return render_template("game.html",message=result,neet_answer="",money=player.money,fatigue=player.mother_fatigue,time="仕事前")
 
 @app.route("/buy")
 def buy():

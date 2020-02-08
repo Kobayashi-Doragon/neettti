@@ -1,15 +1,17 @@
 # 各メソッドを用意する用
+import sql
 
 class player():
-
 # コンストラクタ
     def __init__(self):
         self.player_id=0
         self.mother_fatigue=0
-        self.money=0
+        self.money=1000
         self.time=True
         self.neet_fulness=0
         self.neet_motivation=0
+        sql.connect(self)
+
 
 # 入力を元にログインしてゲーム画面に
     def login(self,id,password):
@@ -41,9 +43,21 @@ class player():
         return answer
 
 # 食事を与えたとき
+# 選択されたアイテムとDBを照合しステータスを更新
     def feed(self,food_id):
-        # 選択されたアイテムとDBを照合しステータスを更新
-        return True
+        # お金が足りるか確認用
+        check="select food_price from food1 where food_id = '" + food_id + "'"
+        price=sql.query(self,check)[0]
+
+        if self.money-price<0:
+            return "お金が足りません"
+        else:
+            text="select * from food1 where food_id = '" + food_id + "'"
+            result=sql.query(self,text)
+            self.money-=price
+            self.neet_fulness+=result[3]
+            self.neet_motivation+=result[4]
+            return result[1]+"をあげた"
 
 # 物を買ってあげたとき
     def buy(self):
