@@ -74,6 +74,14 @@ body {
   background-image: url("../image/background.jpg");
   background-repeat: no-repeat;
 }
+@media (max-width: 480px) {
+  .main-screen {
+    top: 20px;
+    left: 20px;
+    width: calc( 100% - 2*20px);
+    height: calc(100% - 2*20px);
+  }
+}
 
 .title-message {
   position: absolute;
@@ -83,6 +91,32 @@ body {
   font-size: 56px;
   margin: 5px;
 }
+@media (max-width: 780px) {
+  .title-message {
+    font-size: 64px;
+  }
+}
+@media (max-width: 480px) {
+  .title-message {
+    display: none;
+  }
+}
+
+.title-message-sp {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+  margin: 5px;
+  display: none;
+}
+@media (max-width: 480px) {
+  .title-message-sp {
+    display: block;
+  }
+}
 
 .login-form {
   position: absolute;
@@ -90,6 +124,11 @@ body {
   width: 50%;
   text-align: center;
   display: inline-block;
+}
+@media (max-width: 480px) {
+  .login-form {
+    top: 220px;
+  }
 }
 
 .register-form {
@@ -99,6 +138,11 @@ body {
   width: 50%;
   text-align: center;
   display: inline-block;
+}
+@media (max-width: 480px) {
+  .register-form {
+    top: 220px;
+  }
 }
 
 .id-form {
@@ -117,6 +161,20 @@ body {
 .id-form ::placeholder {
   color: white;
 }
+@media (max-width: 780px) {
+  .id-form {
+    font-size: 50px;
+    width: 300px;
+    height: 60px;
+  }
+}
+@media (max-width: 480px) {
+  .id-form {
+    font-size: 25px;
+    width: 130px;
+    height: 30px;
+  }
+}
 
 .pass-form {
   font-size: 30px;
@@ -130,6 +188,20 @@ body {
 }
 .pass-form ::placeholder {
   color: white;
+}
+@media (max-width: 780px) {
+  .pass-form {
+    font-size: 50px;
+    width: 300px;
+    height: 60px;
+  }
+}
+@media (max-width: 480px) {
+  .pass-form {
+    font-size: 25px;
+    width: 130px;
+    height: 30px;
+  }
 }
 
 .submit-button {
@@ -154,6 +226,34 @@ body {
   box-shadow: 0 0px 12px #BBB;
   transition: all 0.2s ease;
   transform: translateY(1px);
+}
+@media (max-width: 780px) {
+  .submit-button:active {
+    width: 298px;
+    height: 64px;
+    font-size: 44px;
+  }
+}
+@media (max-width: 480px) {
+  .submit-button:active {
+    width: 148px;
+    height: 39px;
+    font-size: 22px;
+  }
+}
+@media (max-width: 780px) {
+  .submit-button {
+    font-size: 45px;
+    width: 300px;
+    height: 65px;
+  }
+}
+@media (max-width: 480px) {
+  .submit-button {
+    font-size: 23px;
+    width: 150px;
+    height: 40px;
+  }
 }
 
 /*# sourceMappingURL=login.css.map */
