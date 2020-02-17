@@ -2,11 +2,15 @@
 
 import psycopg2
 
-#connection = psycopg2.connect("host=192.168.0.10 port=5432 dbname=testdb user=testuser password=testpassword")
-#cursor = connection.cursor()
-#cur.execute('SELECT * FROM users')
-#cur.close()
-#conn.close()
 
-def connect():
-    return True
+def connect(self):
+    self.conn=psycopg2.connect("host=127.0.0.1 dbname=food user=postgres password=postgres")
+    self.cur=self.conn.cursor()
+
+def query(self,text):
+    self.cur.execute(text)
+    return self.cur.fetchone()
+
+def add(self,text):
+    self.cur.execute(text)
+    self.conn.commit()
