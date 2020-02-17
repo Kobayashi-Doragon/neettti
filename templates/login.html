@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/login.css') }}">
 
         <title>ニートっち - ログイン</title>
@@ -15,6 +16,7 @@
             <!--入力間違いのときのエラーメッセージ用-->
             {{ message }}
             <h1 class="title-message">ニートっちへようこそ</h1>
+            <h1 class="title-message-sp">ニートっち</h1>
             <div class="login-form">
                 <form action="/login" method="POST">
                     <input type="text" name="id" placeholder="ユーザー名" class="id-form"><br>
