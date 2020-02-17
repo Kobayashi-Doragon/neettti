@@ -19,7 +19,7 @@ def login():
     password=request.form["password"]
     # DBと同じならゲーム画面へ、違うならもう一度入力してもらう
     if(player.login(id,password)):
-        return render_template("game.html",money=player.money,fatigue=player.mother_fatigue,time="仕事前")
+        return render_template("game.html",money=player.money,fatigue=player.mother_fatigue,time=player.time)
     else:
         return render_template("login.html",message="ユーザIDもしくはパスワードが間違っています")
 
@@ -29,50 +29,64 @@ def create_account():
     id = request.form["id"]
     password = request.form["password"]
 
+    if id == "" or password == "":
+        return render_template("login.html",message="ユーザIDとパスワードを入力してください")
+
     if(player.create(id,password)):
-        return render_template("game.html",money=player.money,fatigue=player.mother_fatigue,time="仕事前")
+        return render_template("game.html",money=player.money,fatigue=player.mother_fatigue,time=player.time)
     else:
         return render_template("login.html",message="ユーザIDが既に使用されています")
 
 
 # セーブボタン用
-
+@app.route("/save")
+def save():
+    player.save()
+    return render_template("game.html",message="セーブしました",neet_answer="",money=player.money,fatigue=player.mother_fatigue,time=player.time)
 
 # セーブしてログイン画面に戻る
 @app.route("/logout")
 def logout():
-    # セーブ
+    player.save()
     return render_template("login.html")
 
 # ご飯と同じく選択肢で
 @app.route("/talk")
 def talk():
     # トーク
-    answer=player.talk()
-    return render_template("game.html",message="話しかけた",neet_answer=answer,money=player.money,fatigue=player.mother_fatigue,time="仕事前")
+    talk_id = request.args.get("talk_id")
+    answer=player.talk(talk_id)
+    if player.check_neet() :
+        return render_template("game.html",message="ニートが出てきた",neet_answer=answer,money=player.money,fatigue=player.mother_fatigue,time=player.time)
+    return render_template("game.html",message="話しかけた",neet_answer="ニート「"+answer+"」",money=player.money,fatigue=player.mother_fatigue,time=player.time)
 
 @app.route("/feed")
 def feed():
     # feed
     food_id = request.args.get("food_id")
     result=player.feed(food_id)
-    return render_template("game.html",message=result,neet_answer="",money=player.money,fatigue=player.mother_fatigue,time="仕事前")
+    if player.check_neet() :
+        return render_template("game.html",message="ニートが出てきた",neet_answer="",money=player.money,fatigue=player.mother_fatigue,time=player.time)
+    return render_template("game.html",message=result,neet_answer="",money=player.money,fatigue=player.mother_fatigue,time=player.time)
 
 @app.route("/buy")
 def buy():
     # buy
     buy_id = request.args.get("buy_id")
-    return render_template("game.html",message=buy_id+"を与えた",neet_answer="",money=player.money,fatigue=player.mother_fatigue,time="仕事前")
+    result=player.buy(buy_id)
+    if player.check_neet() :
+        return render_template("game.html",message="ニートが出てきた",neet_answer="",money=player.money,fatigue=player.mother_fatigue,time=player.time)
+    return render_template("game.html",message=result,neet_answer="",money=player.money,fatigue=player.mother_fatigue,time=player.time)
 
-@app.route("/work")
+@app.route("/work_sleep")
 def work():
-    # work
-    return render_template("game.html",message="仕事に行った",money=player.money,fatigue=player.mother_fatigue,time="仕事前")
-
-@app.route("/sleep")
-def sleep():
-    # sleep
-    return render_template("game.html",message="寝た",money=player.money,fatigue=player.mother_fatigue,time="仕事前")
+    if player.time=="仕事前":
+        result = player.work()
+    else:
+        result = player.sleep()
+    if player.check_neet() :
+        return render_template("game.html",message="ニートが出てきた",neet_answer="",money=player.money,fatigue=player.mother_fatigue,time=player.time)
+    return render_template("game.html",message=result,money=player.money,fatigue=player.mother_fatigue,time=player.time)
 
 
 

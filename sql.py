@@ -10,3 +10,7 @@ def connect(self):
 def query(self,text):
     self.cur.execute(text)
     return self.cur.fetchone()
+
+def add(self,text):
+    self.cur.execute(text)
+    self.conn.commit()
